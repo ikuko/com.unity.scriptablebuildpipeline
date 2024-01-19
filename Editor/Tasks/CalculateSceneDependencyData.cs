@@ -86,7 +86,7 @@ namespace UnityEditor.Build.Pipeline.Tasks
 #endif
             var objectTypes = new List<ObjectTypes>();
             var dependencies = new HashSet<CacheEntry>(prefabEntries);
-            ExtensionMethods.ExtractCommonCacheData(m_Cache, null, references, uniqueTypes, objectTypes, dependencies);
+            Utilities.ExtensionMethods.ExtractCommonCacheData(m_Cache, null, references, uniqueTypes, objectTypes, dependencies);
             info.Dependencies = dependencies.ToArray();
 
             info.Data = new object[] { sceneInfo, usageTags, prefabDependency, objectTypes };
@@ -155,7 +155,7 @@ namespace UnityEditor.Build.Pipeline.Tasks
                                     {
                                         var sceneInfoNew = ContentBuildInterface.CalculatePlayerDependenciesForScene(scenePath, settings, usageTags, m_DependencyData.DependencyUsageCache, DependencyType.ValidReferences);
                                         filteredReferencesNew = sceneInfoNew.referencedObjects.ToArray();
-                                        filteredReferencesNew = ExtensionMethods.FilterReferencedObjectIDs(scene, filteredReferencesNew, m_Parameters.Target, m_Parameters.ScriptInfo, new HashSet<GUID>(m_Content.Assets));
+                                        filteredReferencesNew = Utilities.ExtensionMethods.FilterReferencedObjectIDs(scene, filteredReferencesNew, m_Parameters.Target, m_Parameters.ScriptInfo, new HashSet<GUID>(m_Content.Assets));
                                     }
                                     else
 #endif
@@ -191,7 +191,7 @@ namespace UnityEditor.Build.Pipeline.Tasks
                         {
                             sceneInfo = ContentBuildInterface.CalculatePlayerDependenciesForScene(scenePath, settings, usageTags, m_DependencyData.DependencyUsageCache, DependencyType.ValidReferences);
                             ObjectIdentifier[] filteredReferences = sceneInfo.referencedObjects.ToArray();
-                            filteredReferences = ExtensionMethods.FilterReferencedObjectIDs(scene, filteredReferences, m_Parameters.Target, m_Parameters.ScriptInfo, new HashSet<GUID>(m_Content.Assets));
+                            filteredReferences = Utilities.ExtensionMethods.FilterReferencedObjectIDs(scene, filteredReferences, m_Parameters.Target, m_Parameters.ScriptInfo, new HashSet<GUID>(m_Content.Assets));
                             ContentBuildInterface.CalculateBuildUsageTags(filteredReferences, filteredReferences, sceneInfo.globalUsage, usageTags);
                             sceneInfo.SetReferencedObjects(filteredReferences);
                         }

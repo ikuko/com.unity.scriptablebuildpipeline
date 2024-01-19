@@ -123,7 +123,7 @@ namespace UnityEditor.Build.Pipeline.Tasks
             var uniqueTypes = new HashSet<System.Type>();
             var objectTypes = new List<ObjectTypes>();
             var dependencies = new HashSet<CacheEntry>();
-            ExtensionMethods.ExtractCommonCacheData(input.BuildCache, assetInfo.includedObjects, assetInfo.referencedObjects, uniqueTypes, objectTypes, dependencies);
+            Utilities.ExtensionMethods.ExtractCommonCacheData(input.BuildCache, assetInfo.includedObjects, assetInfo.referencedObjects, uniqueTypes, objectTypes, dependencies);
             info.Dependencies = dependencies.ToArray();
 
             info.Data = new object[] { assetInfo, usageTags, importerData, assetData, objectTypes, objectDependencies };
